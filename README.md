@@ -8,7 +8,7 @@ Built as a portfolio project for data governance and analytics engineering roles
 
 1. **Extract** — Fetches the books.toscrape.com homepage and parses the first page listings
 2. **Transform** — Pulls title and price from each listing, casts price to float, sorts by price ascending using pandas
-3. **Load** — Writes the cleaned data to `scrapedBooks.csv` and a `scrapedBooks` table in `scrapedBooks.db`
+3. **Load** — Writes the cleaned data to `books.csv` and a `books` table in `books.db`
 
 ## Stack
 
@@ -30,14 +30,20 @@ python main.py
 ```
 
 Outputs:
-- `scrapedBooks.csv` — flat file export
-- `scrapedBooks.db` — SQLite database with a `scrapedBooks` table
+- `books.csv` — flat file export
+- `books.db` — SQLite database with a `books` table
 
 ## Project Structure
 
 ```
 web-scraping-project/
-├── main.py           # ETL pipeline (scrape → clean → store)
+├── data_dictionary.md
+├── main.py
+├── README.md
+├── load.py
+├── scrape.py
+├── transform.py
+├── scrape.py
 ├── scrapedBooks.csv  # CSV output
 └── scrapedBooks.db   # SQLite output
 ```
@@ -48,3 +54,4 @@ web-scraping-project/
 |--------|---------|-------------------------------|--------------------------------|
 | Title  | string  | `<article>` title attribute   | Full book title, whitespace stripped |
 | Price  | float   | `.price_color` paragraph text | GBP value, £ symbol removed    |
+|Scraped Time | datetime | system settings | format: "mm-dd-yy hh-mm-ss"|
