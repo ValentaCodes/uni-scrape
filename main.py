@@ -4,6 +4,9 @@
 
 import csv
 import requests
+import pandas as pd
+import sqlite3 as sql
+
 from bs4 import BeautifulSoup
 
 """
@@ -12,6 +15,7 @@ scaper should gather program information
 Parse data
 categorize and data and save as a CSV file
 """
+
 def parse_csv(filename):
     """
     Opens a CSV file and prints each row as a dictionary.
@@ -29,6 +33,7 @@ def parse_csv(filename):
         print(f"Error opening file {filename}: {e}")
 
 def scrape_site():
+    books = []
     r = requests.get("https://books.toscrape.com")
     soup = BeautifulSoup(r.content, "html.parser")
 
@@ -36,18 +41,24 @@ def scrape_site():
     for pod in products:
         titles = pod.find_all(title=True)
         prices = pod.find_all("p", {"class": "price_color"})
-        for title in titles:
-            print(title.text)
-            for price in prices:
-                print(price.text)
+        price = prices.pop(0).text.strip('£').strip()
+        title = titles.pop(0).attrs["title"].strip()
+        books.append({"Title": title, "Price": float(price)})
+
+    df = pd.DataFrame(books, columns=["Title", "Price"])
+    df.sort_values(by=["Price"], ascending=True, inplace=True)
+    df.to_csv("scrapedBooks.csv", index=False)
+
+    save_to_db(df)
+
+def save_to_db(df):
+    conn = sql.connect("scrapedBooks.db")
+    df.to_sql("scrapedBooks", conn, index=False, if_exists="replace")
+    conn.commit()
+    conn.close()
+
 def main():
     scrape_site()
-
-    # file_path = input("Enter file location: ").strip()
-    # if not file_path:
-    #     print("No file path provided.")
-    #     return
-    # parse_csv(file_path)
 
 if __name__ == "__main__":
     main()
