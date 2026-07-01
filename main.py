@@ -54,8 +54,7 @@ def scrape_site():
 def save_to_db(df):
     conn = sql.connect("scrapedBooks.db")
     df.to_sql("scrapedBooks", conn, index=False, if_exists="replace")
-    res = conn.execute("Select * from scrapedBooks")
-    print(res.fetchall())
+    conn.commit()
     conn.close()
 
 def main():
