@@ -6,7 +6,7 @@ Built as a portfolio project for data governance and analytics engineering roles
 
 ## What It Does
 
-1. **Extract** — Fetches the books.toscrape.com homepage and parses every book listing
+1. **Extract** — Fetches the books.toscrape.com homepage and parses the first page listings
 2. **Transform** — Pulls title and price from each listing, casts price to float, sorts by price ascending using pandas
 3. **Load** — Writes the cleaned data to `scrapedBooks.csv` and a `scrapedBooks` table in `scrapedBooks.db`
 
