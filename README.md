@@ -26,7 +26,7 @@ pip install requests beautifulsoup4 pandas
 ## Run
 
 ```bash
-python main.py
+python3 main.py
 ```
 
 Outputs:
