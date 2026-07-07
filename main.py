@@ -3,7 +3,6 @@
 # Week 3 checkpoint - Clean data and store it in database
 
 from transform import transform
-from load import load
 from driver import driver
 """
 Enter uni name
