@@ -3,7 +3,8 @@
 # Week 3 checkpoint - Clean data and store it in database
 
 from transform import transform
-from driver import driver
+from driver import driver, flatten_books
+from load import load
 """
 Enter uni name
 scaper should gather program information 
@@ -14,9 +15,10 @@ categorize and data and save as a CSV file
 def main():
     url = "https://books.toscrape.com/"
 
-    books = driver(url)
-    transform(books)
-    # load(data_frame)
+    pages = driver(url)
+    all_books = flatten_books(pages)
+    df = transform(all_books)
+    load(df)
 
 
 if __name__ == "__main__":

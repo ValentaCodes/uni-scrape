@@ -1,5 +1,5 @@
 import sqlite3 as sql
-
+from driver import flatten_books
 def load(df):
     conn = sql.connect("books.db")
     df.to_sql("books", conn, index=False, if_exists="replace")
