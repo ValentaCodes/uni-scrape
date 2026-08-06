@@ -14,13 +14,14 @@ Built as a portfolio project for data governance and analytics engineering roles
 
 - `requests` — HTTP fetching
 - `beautifulsoup4` — HTML parsing
+- `Selenium` - Browser automation
 - `pandas` — data cleaning and transformation
 - `sqlite3` — local database storage (built into Python)
 
 ## Setup
 
 ```bash
-pip install requests beautifulsoup4 pandas
+pip install requests beautifulsoup4 pandas selenium
 ```
 
 ## Run

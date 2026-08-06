@@ -5,18 +5,18 @@ from datetime import datetime
 
 def scrape(url):
     """Scrapes books from website"""
-    books = []
-    r = requests.get(url)
+    data = [] # starting storage for data
+    r = requests.get(url) # creates request to get given url
 
-    soup = BeautifulSoup(r.content, "html.parser")
-    products = soup.find_all("article", {"class": "product_pod"})
+    soup = BeautifulSoup(r.content, "html.parser") #instantiate soup object
+    products = soup.find_all("article", {"class": "product_pod"}) #create product soup
 
-    for pod in products:
-        titles = pod.find_all(title=True)
-        prices = pod.find_all("p", {"class": "price_color"})
+    # iterate through all found products and create item data, appends to data list
+    for item in products:
+        titles = item.find_all(title=True)
+        prices = item.find_all("p", {"class": "price_color"})
         price = prices.pop(0).text.strip('£').strip()
         title = titles.pop(0).attrs["title"].strip()
-        books.append(
+        data.append(
             {"Title": title, "Price": float(price), "Scraped_Time": datetime.now().strftime("%m-%d-%y %H:%M:%S")})
-
-    return books
+    return data
