@@ -1,8 +1,8 @@
 import sqlite3 as sql
-from driver import flatten_books
+
 def load(df):
     conn = sql.connect("books.db")
-    df.to_sql("books", conn, index=False, if_exists="replace")
+    df.to_sql("books", conn, index=False, if_exists="replace", index_label="book_id")
     conn.commit()
     conn.close()
     print("Books saved to database!")

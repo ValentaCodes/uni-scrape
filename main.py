@@ -3,7 +3,7 @@
 # Week 3 checkpoint - Clean data and store it in database
 
 from transform import transform
-from driver import driver, flatten_books
+from driver import (driver, flatten_books)
 from load import load
 """
 Enter uni name
@@ -16,10 +16,9 @@ def main():
     url = "https://books.toscrape.com/"
 
     pages = driver(url)
-    all_books = flatten_books(pages)
-    df = transform(all_books)
-    load(df)
-
+    flat_books = flatten_books(pages)
+    all_books = transform(flat_books)
+    load(all_books)
 
 if __name__ == "__main__":
     main()
